@@ -8,8 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -46,38 +49,45 @@ public class BuscarYRemplazar extends Application {
 		check3= new CheckBox("Buscar hacia atrás");
 		check4= new CheckBox("Resaltar resultados");
 		
-		GridPane checkers= new GridPane();
-		checkers.setPadding(new Insets(5));
-		checkers.setHgap(5);
-		checkers.setVgap(5);
-		checkers.addRow(0, check1, check3);
-		checkers.addRow(1, check2, check4);
-		
-		VBox botones= new VBox();
-		botones.setPadding(new Insets(5));
-		botones.setAlignment(Pos.TOP_RIGHT);
-		botones.setSpacing(5);
-		botones.setFillWidth(true);
-		botones.getChildren().addAll(boton1, boton2, boton3, boton4, boton5);
-			
-		GridPane formPane= new GridPane();
+		GridPane formPane = new GridPane();
+		formPane.setGridLinesVisible(false);
+		formPane.setHgap(7);
+		formPane.setVgap(7);
 		formPane.setPadding(new Insets(5));
-		formPane.setHgap(5);
-		formPane.setVgap(5);
-		formPane.addRow(0, new Label("Buscar:"), caja1);
-		formPane.addRow(1, new Label("Remplazar con:"), caja2);
-		formPane.add(checkers, 1, 2);
+		formPane.addRow(0, new Label("Buscar: "), caja1);
+		formPane.addRow(1, new Label("Remplazar con: "), caja2);
+
+		formPane.add(check1, 1, 2);
+		formPane.add(check3, 2, 2);
+		formPane.add(check2, 1, 3);
+		formPane.add(check4, 2, 3);
 		
-		HBox root = new HBox();
-		root.setAlignment(Pos.CENTER);
-		root.setSpacing(5);
+		GridPane.setColumnSpan(caja1, 2);
+		GridPane.setColumnSpan(caja2, 2);
+		
+		ColumnConstraints [] cols = {
+				new ColumnConstraints(),	
+				new ColumnConstraints(),	
+				new ColumnConstraints(),	
+				new ColumnConstraints(),
+			};
+		formPane.getColumnConstraints().setAll(cols);
+		
+		cols[2].setHgrow(Priority.ALWAYS);
+		
+		
+		VBox botones = new VBox(5);
+		botones.getChildren().addAll(boton1, boton2, boton3, boton4, boton5);
+		
+		BorderPane root = new BorderPane();
 		root.setPadding(new Insets(5));
-		root.getChildren().addAll(formPane, botones);
-	
-		Scene escena = new Scene(root, 550, 200);
+		root.setCenter(formPane);
+		root.setRight(botones);
 		
-		primaryStage.setTitle("Buscar y reemplazar");
-		primaryStage.setScene(escena);
+		Scene scene = new Scene(root, 500, 185);
+
+		primaryStage.setTitle("Buscar Y Remplazar");
+		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 
