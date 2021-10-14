@@ -74,7 +74,7 @@ public class BuscarYRemplazar extends Application {
 		root.setPadding(new Insets(5));
 		root.getChildren().addAll(formPane, botones);
 	
-		Scene escena = new Scene(root, 500, 200);
+		Scene escena = new Scene(root, 550, 200);
 		
 		primaryStage.setTitle("Buscar y reemplazar");
 		primaryStage.setScene(escena);
